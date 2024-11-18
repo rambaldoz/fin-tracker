@@ -10,16 +10,33 @@ export const useFetchTransactions = (period) => {
     const expense = computed(() => 
         transactions.value.filter( t => t.type === 'Expense')
     )
+
+    const investment = computed(() => 
+        transactions.value.filter( t => t.type === 'Investment')
+    )
+
+    const savings = computed(() => 
+        transactions.value.filter( t => t.type === 'Savings')
+    )
     
     const incomeCount = computed(() => income.value.length)
     const expenseCount = computed(() => expense.value.length)
-    
+    const investmentCount = computed(() => investment.value.length)
+    const savingsCount = computed(() => savings.value.length)
     const incomeTotal = computed(() => 
         income.value.reduce((sum, transaction) => sum + transaction.amount, 0)
     )
     
     const expenseTotal = computed(() => 
         expense.value.reduce((sum, transaction) => sum + transaction.amount, 0)
+    )
+
+    const investmentTotal = computed(() => 
+        investment.value.reduce((sum, transaction) => sum + transaction.amount, 0)
+    )
+    
+    const savingsTotal = computed(() => 
+        savings.value.reduce((sum, transaction) => sum + transaction.amount, 0)
     )
 
     const fetchTransactions = async () => {
@@ -75,10 +92,16 @@ export const useFetchTransactions = (period) => {
             },
             income,
             expense,
+            investment,
+            savings,
             incomeTotal,
             expenseTotal,
+            investmentTotal,
+            savingsTotal,
             incomeCount,
             expenseCount,
+            investmentCount,
+            savingsCount,
         },
         refresh,
         pending

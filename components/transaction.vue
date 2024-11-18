@@ -32,11 +32,13 @@ const emit = defineEmits([
 ])
 
 const isIncome = computed(() => props.transaction.type === 'Income')
+const isSavings = computed(() => props.transaction.type === 'Savings')
+
 const icon = computed(
-    () => isIncome.value ? 'i-lucide-arrow-up-right' : 'i-lucide-arrow-down-left'
+    () => isIncome.value || isSavings.value ? 'i-lucide-arrow-up-right' : 'i-lucide-arrow-down-left'
 )
 const iconColor = computed(
-    () => isIncome.value ? 'text-green-600' : 'text-red-600'
+    () => isIncome.value || isSavings.value ? 'text-green-600' : 'text-red-600'
 )
 
 const { currency } = useCurrency(props.transaction.amount);
